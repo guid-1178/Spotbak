@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title> Internal Server Error</title>
+    </head>
+    <body>
+        <h2>Internal Server Error</h2>
+        <p>Setup has run into an error.</p>
+        {% if request.path == '/spotify/callback' %}
+        <p> Error appears to have occured at the authorization step.
+            common causes:
+            <ul>
+                <li>DB and csv paths in config.yaml were manually entered instead of using web interface
+                    <ul><li>fix this by clicking 'start-over' to reset the paths or remove paths from config file.</li></ul>
+                </li>
+                <li>Spotify has changed their API.
+                    <ul><li>raise an issue in github or try fix yourself and submit a pull request.</li></ul>
+                </li>
+            </ul>
+        </p>
+        {% endif %}
+    </body>
+</html>

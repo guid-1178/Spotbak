@@ -31,7 +31,6 @@ class spotify(object):
     def get_userinfo (self,access_token):
         headers = { 'Authorization' : 'Bearer  {0}'.format(access_token) }
         r = requests.get(self.api_url + '/v1/me', headers=headers)
-        print(r.text)
         return(json.loads(r.text))   
 
     def get_token(self,code):
@@ -45,7 +44,6 @@ class spotify(object):
     def check_token(self,access_token):
         headers = { 'Authorization' : 'Bearer  {0}'.format(access_token) }
         r = requests.get(self.api_url + '/v1/me', headers=headers)
-        # print(r.text)
         return(json.loads(r.text))  
 
     def renew_token(self,refresh_token):
@@ -81,7 +79,6 @@ def installdb(dbPath,dbFullPath,csvPath):
     tablecheck = db.query("""SELECT name FROM sqlite_master WHERE type='table' AND name='users_spotbak';""").fetchone()
     
     if not tablecheck:
-        print("Empty")
         create_table = """CREATE TABLE
         users_spotbak(user TEXT NOT NULL,
         country TEXT, 

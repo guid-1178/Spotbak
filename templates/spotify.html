@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>Spotbak: Spotify Authorisation</title>
+  <link rel="stylesheet" href='/static/main.css' />  
+</head>
+<body>
+<div class="centre">
+{% if request.path == '/spotify/auth' %}
+  <h2>Spotify Authorisation</h2>
+  <p>Next step is to authenticate with spotify to authorise this app.</p>
+  <p>This application will only ask for the following permissions:</p>
+  <div class="listblock">
+  <ul>
+    <li>playlist-read-private</li>
+    <ul>
+      <li>Reads a users private playlists</li>
+    </ul>
+    <li>playlist-read-collaborative</li>
+    <ul>
+      <li>playlists that may not be owned by the user, eg. Release Radar.</li>
+    </ul>
+    <li>user-read-private</li>
+    <ul>
+      <li>Read user profile, including name, country, profile picture.</li>
+      <li>only used for user's name and confirm subscription level (free, premium)</li>
+    </ul>
+  </ul>
+  </div>
+  <p class="notice">All spotify data is stored locally within this app, it will not be shared with anyone.</p>
+
+  <a href={{ auth_url }}><button class="button" type="button">Authorise</button></a>
+{% endif %}
+
+{% if request.path == '/spotify/callback' %}
+    {% if error %}
+      <h3> Error: {{ error }}</h3>
+    {% else %}
+    <h3>App authorization successful for username: {{ user_info['display_name'] }}</h3>
+      {% if session['user-installed'] %}
+        <h3>configuration complete!</h3>
+        <p class="notice">User has been added to the database.</p>
+        <p>you can now close this page and use the spotbak script in CLI</p>
+      {% endif %}    
+    {% endif %}
+{% endif %} 
+
+</div>
+</body>
+</html>

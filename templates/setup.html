@@ -1,0 +1,61 @@
+<html>
+  <head>
+  <title>Spotbak: Install</title>
+  <link rel="stylesheet" href='/static/main.css' /> 
+  </head>
+</head>
+<body>
+  <div class="centre">
+    <h2>Database installation</h2>
+{% if not session['installed'] %}
+  {% if not db_path or not csv_path %}
+    <p>Please provide path for database location and CSV output</p>
+    <h3>Status: Paths not configured</h3>
+    <form method="post">
+      <label for="dbpath">Database path:</label><br>
+      <input type="text" id="dbpath" name="dbpath" value={{ db_path|d('', true) }}><br>
+      <label for="csvpath">CSV output path:</label><br>
+      <input type="text" id="csvpath" name="csvpath" value={{ csv_path|d('', true) }}>
+      <br><br>
+      <button class="button" type="submit"> submit </button>
+    </form> 
+  {% elif db_path or csv_path %}
+    <table>
+      <tr>
+        <td>DB Path:</td>
+        <td>{{ db_path }}</td>
+      </tr>
+      <tr>
+        <td>CSV path:</td>
+        <td>{{ csv_path }}</td>
+      </tr>
+    </table>
+    <br>
+    <form action="" method="post">
+      <label for="install-db">click install to validate paths and install database</label>
+      <br>
+      <input class="button" type="submit" name="install-db" value="install" />
+    <br>
+    <br>
+  {% endif %}
+{% endif %}
+
+{% if session['installed'] %}
+  <h3>Database has been installed successfully</h3>
+  <p>Click next to Authenticate with Spotify.</p>
+    <a href="/spotify/auth"><button class="button" type="button">Next</button></a>
+
+{% endif %}
+<br>
+<br>
+<form action="" method="post">
+  <label for="clear-config">To reset path configuration:</label>
+  <input class="button2" type="submit" name="clear-config" value="start-over" />
+</form>
+<div class="subtext">
+<p >starting over doesn't remove existing databases or csv files.</p>
+<p >please manually delete these files if required.</p>
+</div>
+</div>
+</body>
+</html>

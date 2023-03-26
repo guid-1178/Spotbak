@@ -1,8 +1,12 @@
 # Spotbak
 
-small set of scripts to query spotify API for a users playlists and save them as a CSV file.
+A simple app to query spotify API for a users playlists and save them as a CSV file.
 
-Idea behind this was if there was a situation where spotify was no longer available, it would be benificial to have a backup of the users playlists.
+Idea behind this was if there was a situation where spotify was no longer available, it would be benificial to have a backup of the users playlists so they can be recreated.
+
+The other use case is that spotify created playlists such as 'Discover Weekly' and 'Release Radar'  get overwritten each week and there's no way to recover the old list of songs.
+
+Spotbak will save the song information into a CSV to allow you to look at the playlist history.
 
 ## Setup
 

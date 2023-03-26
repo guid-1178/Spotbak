@@ -66,14 +66,15 @@ def foldercheck(path,user):
 def main():
 	#get CLI arguments
 	value = menu(sys.argv[1:])
-	user = value[0]
+	user = value
 	outputfolder = config['csv']['path']
 	# call folder check function to check if path exists. if not, it creates path
 	outputfolder = foldercheck(outputfolder,user)
 	#get the users ID from SQL
+	
 	userid = db.query('select userid from users_spotbak where user = {0};'.format(user)).fetchone()[0]
 	#get the refresh token from SQL ( if needed)
-	tokens = db.query("""select refresh_token,access_token from users_spotbak where user = {0}""".format(user)).fetchall()[0]
+	tokens = db.query("""select refresh_token,access_token from users_spotbak where user = {0}""".format(user)).fetchone()
 
 	refresh_token = tokens[0]
 	#query SQL for the access token based on Users display name
@@ -98,7 +99,6 @@ def main():
 
 	#get all users playlits from API
 	pl_response = client.get_playlist(access_token,userid)
-
 	playlist = {} #INIT playlist dict
 	#loop though JSON response and fill dict with playlist name as KEY,  playlist ID as value.
 	for name in pl_response['items']:

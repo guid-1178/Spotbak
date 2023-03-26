@@ -1,14 +1,14 @@
 csv:
-  path: tmp/csv
+  path: ''
 db:
   name: userdb.sqlite
-  path: tmp/db
+  path: ''
 spotify:
   accounts_url: https://accounts.spotify.com
   api_url: https://api.spotify.com
   callback_url: http://localhost:5000/spotify/callback
-  client_id: ''
-  client_secret: ''
+  client_id: 
+  client_secret: 
   scopes:
   - playlist-read-private
   - playlist-read-collaborative
